@@ -5,11 +5,11 @@ where Unitprice = 15
 select * from Products
 where UnitsInStock < 250
 --3
-SELECT * from ProductID, ProductName
-from Product 
+SELECT ProductID, ProductName
+from Products 
 where Discontinued = 1
 --4
-select * from ProductID, ProductName, UnitPrice
+select ProductID, ProductName, UnitPrice
 from Products
 where UnitPrice> 100
 --5
@@ -17,9 +17,9 @@ SELECT ProductID, UnitPrice
 from Products 
 where ProductName like '%ยางลบ%'
 --6
-SELECT ReceipID, ReceipDate, TotaCash
+SELECT ReceiptID, ReceiptDate, TotalCash
 from Receipts
-where ReceipDate < '2023-02-15'
+where ReceiptDate < '2023-02-15'
 --7
 select productID, ProductName, UnitsInstock
 from Products
@@ -27,14 +27,14 @@ where UnitsInstock >=400
 --8
 select productID, ProductName, UnitPrice, UnitsInstock
 from Products
-where CategoryName = ('แชมะพู','ดินสอ','แป้งเด็ก','ยางลบ')
+where ProductName in ('แชมะพู','ดินสอ','แป้งเด็ก','ยางลบ')
 --9
 select CategoryID, CategoryName[Deceiption]
 from Categories
 where CategoryName = 'เครื่องสำอาง'
 --10
 select Title,FirstName,LastName
-from Employes
+from Employees
 where [Position] = 'Sale Representative'
 --11
 select Title,FirstName+space(1),LastName, EmpName, UserName
