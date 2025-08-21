@@ -44,7 +44,7 @@ FROM Orders O
 join Customers C on O.CustomerID=C.CustomerID
 join Employees E on O.EmployeeID=E.EmployeeID
 
-select e.EmployeeID, FirstName , count(*) as [จ านวน order] , sum(freight) as [Sum of Freight]
+select e.EmployeeID, FirstName , count(*) as [จำนวน order] , sum(freight) as [Sum of Freight]
 from Employees e join Orders o on e.EmployeeID = o.EmployeeID
 where year(orderdate) = 1998
 group by e.EmployeeID, FirstName
@@ -64,3 +64,10 @@ from Employees e join Orders o on e.EmployeeID = o.EmployeeID
 		   join Products p on p.ProductID = od.ProductID
 Where e.FirstName = 'Nancy'
 order by ProductID
+
+ select distinct s. Country
+ from customers c Join orders o on c. CustomerID = o. CustomerID
+                  join [Order Details] od on o.OrderID = od. OrderID
+                  join products p on p.ProductID = od.ProductID
+                  join Suppliers s on s. SupplierID = p. SupplierID
+ where c. CompanyName = 'Around the Horn'
