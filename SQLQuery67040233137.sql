@@ -43,3 +43,24 @@ SELECT O.OrderID เลขใบสั่งซื้อ, C.CompanyName ลู�
 FROM Orders O
 join Customers C on O.CustomerID=C.CustomerID
 join Employees E on O.EmployeeID=E.EmployeeID
+
+select e.EmployeeID, FirstName , count(*) as [จ านวน order] , sum(freight) as [Sum of Freight]
+from Employees e join Orders o on e.EmployeeID = o.EmployeeID
+where year(orderdate) = 1998
+group by e.EmployeeID, FirstName
+
+SELECT s.CompanyName, count(*) จำนวนorder
+FROM Shippers s JOIN Orders o ON s.ShipperID = o.ShipVia
+GROUP BY s.CompanyName
+order by 2 desc
+
+select p.ProductID, p.ProductName, sum(Quantity) จำนวนที่ขายได้
+from products p join [Order Details] od on p.ProductID = od.ProductID
+group by p.ProductID, p.ProductName
+
+select distinct p.ProductID, p.ProductName
+from Employees e join Orders o on e.EmployeeID = o.EmployeeID
+		   join[Order Details] od on o.OrderID = od.OrderID
+		   join Products p on p.ProductID = od.ProductID
+Where e.FirstName = 'Nancy'
+order by ProductID
