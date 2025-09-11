@@ -1,4 +1,5 @@
 --หาข้อมูลnancy
+--หาข้อมูลnancy
 select title from Employees where FirstName = 'nancy'
 --หาข้อมูลที่มีตำแหน่งเดียวกัน
 select * from Employees where Title = 'Sales Repersentive'
@@ -16,7 +17,7 @@ Where city = (select city from customers
 --
 select FirstName, LastName from Employees
 where HireDate = (select max(HireDate) from Employees)
---ข้อมูลใบสั่งซื้อที่ถูกส่งไปประเทศที่ไม่มีผู้ผลิตสินค้าตั้งอยู๋
+--ข้อมูลใบสั่งซื้อที่ถูกส่งไปประเทศที่ไม่มีผู้ผลิตสินค้าตั้งอยู่
 select * from Orders
 where ShipCountry not in (select distinct country from Suppliers)
 
@@ -27,3 +28,21 @@ select ROW_NUMBER() OVER (order by unitprice) AS RowNum,
 productName , Unitprice 
 from products
 where Unitprice <50
+
+
+
+
+Insert into Shippers
+VALUES('บริษัทขนเยอะจัด','021-12345678')
+
+Insert into Shippers(CompanyName)
+VALUES('บริษัทมหาชนจำกัด')
+
+Insert into Customers(CustomerID, CompanyName)
+VALUES('A0001', 'บริษัทซื้อเยอะจำกัด')
+
+Insert into Employees(FirstName,LastName)
+values ('วุ้นเส้น','เขมรสกุล')
+
+select * from Employees
+
