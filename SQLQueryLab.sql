@@ -1,68 +1,76 @@
---หาข้อมูลnancy
-select title from Employees where FirstName = 'nancy'
---หาข้อมูลที่มีตำแหน่งเดียวกัน
-select * from Employees where Title = 'Sales Repersentive'
---ต้องการชื่อนามสกุลมากที่สุด
-select FirstName, LastName from Employees
-where BirthDate = (Select min(BirthDate) from Employees)
---
-select ProductName from Products
-Where unitprice > (select UnitPrice from products
-						  where productName = 'Ikura')
---ต้องการชื่อบริษัทลูกค้า
-select CompanyName from Customers
-Where city = (select city from customers
-					 where companyName = 'Around the Horn')
---
-select FirstName, LastName from Employees
-where HireDate = (select max(HireDate) from Employees)
---ข้อมูลใบสั่งซื้อที่ถูกส่งไปประเทศที่ไม่มีผู้ผลิตสินค้าตั้งอยู่
-select * from Orders
-where ShipCountry not in (select distinct country from Suppliers)
+-- 1.หาตำเเหน่งของ nancy ก่อน
+SELECT Title 
+FROM Employees 
+WHERE FirstName = 'nancy'
 
---การใส่ตัวเลขลำดับ
+SELECT * 
+FROM Employees
+WHERE Title = (SELECT Title FROM Employees WHERE FirstName = 'nancy')
 
---ต้องการข้อมูลสินค้าที่มีราคาน้อยกว่า 50$
-select ROW_NUMBER() OVER (order by unitprice) AS RowNum,
-productName , Unitprice 
-from products
-where Unitprice <50
+SELECT Firstname,LastName
+FROM Employees
+Where BirthDate = (SELECT min(BirthDate) FROM Employees)
 
+SELECT ProductName
+FROM Products
+WHERE UnitPrice > (SELECT UnitPrice FROM Products WHERE ProductName = 'Ikura')
 
+SELECT CompanyName
+FROM Customers
+WHERE City = (SELECT city FROM Customers WHERE CompanyName = 'Around the Horn')
 
+SELECT FirstName,LastName
+FROM Employees
+WHERE HireDate = (SELECT MAX(HireDate) FROM Employees)
 
-Insert into Shippers
-VALUES('บริษัทขนเยอะจัด','021-12345678')
+SELECT *
+FROM Orders
+WHERE ShipCountry not in (SELECT Distinct Country FROM Suppliers)
 
-Insert into Shippers(CompanyName)
-VALUES('บริษัทมหาชนจำกัด')
+SELECT * over (order by unitprice desc) AS 
 
-Insert into Customers(CustomerID, CompanyName)
-VALUES('A0001', 'บริษัทซื้อเยอะจำกัด')
+SELECT * 
+FROM Shippers
 
-Insert into Employees(FirstName,LastName)
-values ('วุ้นเส้น','เขมรสกุล')
+INSERT INTO Shippers
+VALUES ('บริษัทขนเยอะจำกัด','081-12345678')
 
-select * from Employees
+INSERT INTO Shippers(CompanyName)
+VALUES ('บริษัทขนมมหาศาสจำกัด')
 
+SELECT * FROM Customers
 
+INSERT INTO Customers(CustomerID,CompanyName)
+VALUES ('A0001','บริษัทซื้อเยอะจำกัด')
 
-Update Shippers
-set Phone = '085-99998989'
-where ShipperID = 5
+SELECT * FROM Employees
 
-select * from shippers
+INSERT INTO Employees(FirstName,LastName)
+VALUES ('วุ้นเส้น','ข้าวปุ้น')
 
-UPDATE products
-set UnitsInstock = UnitsInstock+100
-where ProductID = 1
+SELECT * FROM Products
 
-select * from products
+INSERT INTO Products(ProductName,UnitPrice,UnitsInStock)
+VALUES ('ปลาเเดกบอง',1.5,12)
 
-Update Customers
-set City = 'อุดรธานี', Country= 'Thailand'
-where customerID = 'A0001'
+UPDATE Shippers
+SET Phone = '085-9999999'
+WHERE ShipperID = 6
 
-Delete from shippers
-where shipperID = 6
+SELECT * FROM Shippers
 
+UPDATE Products
+SET UnitsInStock = UnitsInStock+100
+WHERE ProductID = 1
+
+SELECT * FROM Customers
+
+UPDATE Customers 
+SET City = 'อุดรธานี' , Country = 'Thailand'
+WHERE CustomerID = 'A0001'
+
+SELECT * FROM Products
+DELETE FROM Products
+WHERE ProductName = 'ปลาเเดกบอง'
+
+SELECT * FROM Orders
