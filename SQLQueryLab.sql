@@ -1,5 +1,4 @@
 --หาข้อมูลnancy
---หาข้อมูลnancy
 select title from Employees where FirstName = 'nancy'
 --หาข้อมูลที่มีตำแหน่งเดียวกัน
 select * from Employees where Title = 'Sales Repersentive'
@@ -45,4 +44,25 @@ Insert into Employees(FirstName,LastName)
 values ('วุ้นเส้น','เขมรสกุล')
 
 select * from Employees
+
+
+
+Update Shippers
+set Phone = '085-99998989'
+where ShipperID = 5
+
+select * from shippers
+
+UPDATE products
+set UnitsInstock = UnitsInstock+100
+where ProductID = 1
+
+select * from products
+
+Update Customers
+set City = 'อุดรธานี', Country= 'Thailand'
+where customerID = 'A0001'
+
+Delete from shippers
+where shipperID = 6
 
